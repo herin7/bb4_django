@@ -1,0 +1,6 @@
+.venv/
+db.sqlite3
+client_secret_file
+.vscode/     
+.idea/       
+pipfile.lock
