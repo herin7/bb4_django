@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Food Items</title>
+</head>
+<body>
+    <h1>Food Items</h1>
+    <ul>
+        {% for food_item in food_items %}
+            {% if food_item.user == request.user %}
+                <li>{{ food_item.name }} - Quantity: {{ food_item.quantity }}, Expiry Date: {{ food_item.expiry_date }}</li>
+            {% endif %}
+        {% empty %}
+            <li>No food items available</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
