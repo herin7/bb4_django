@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
@@ -18,7 +23,7 @@
     
     {% endblock %}
 
-    <a href="/add">add food</a>
+    <a name = "add" id = "add" href="/add">add food</a>
     <br>
     <a href="/view">view my food</a>    
     
