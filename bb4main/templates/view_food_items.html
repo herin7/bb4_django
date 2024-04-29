@@ -10,11 +10,55 @@
     <ul>
         {% for food_item in food_items %}
             {% if food_item.user == request.user %}
-                <li>{{ food_item.name }} - Quantity: {{ food_item.quantity }}, Expiry Date: {{ food_item.expiry_date }}</li>
+
+                <li>name: {{ food_item.product_name }}  type: {{ food_item.product_type }}  Quantity: {{ food_item.quantity }}  Expiry Date: {{ food_item.expiry_date }}</li>
             {% endif %}
         {% empty %}
             <li>No food items available</li>
         {% endfor %}
     </ul>
+ 
+    <ul>
+        {% for food_item in food_items %}
+            {% if food_item.user == request.user %}
+            {% if current %}
+            <h1>Alert!</h1>
+           
+
+                <li>name: {{ food_item.product_name }}  type: {{ food_item.product_type }}  Quantity: {{ food_item.quantity }}  Expiry Date: {{ food_item.expiry_date }}</li>
+            {% endif %}
+            {% endif %}
+        {% empty %}
+            <li>No food items available</li>
+        {% endfor %}
+    </ul>
+
+
+
+<ul>
+    
+
+
+
+    {% for food_item in food_items %}
+    {% if food_item.user == request.user and current %}
+<h1>heruin</h1>
+         heruiin
+
+        <li>name: {{ food_item.product_name }}  type: {{ food_item.product_type }}  Quantity: {{ food_item.quantity }}  Expiry Date: {{ food_item.expiry_date }}</li>
+    {% endif %}
+    {% endfor %}
+
+
+
+</ul>
+
+
+
+
+
+
+
+
 </body>
 </html>
