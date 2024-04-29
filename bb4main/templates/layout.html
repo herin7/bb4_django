@@ -7,7 +7,6 @@
 
 
     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
@@ -22,10 +21,27 @@
 
     
     {% endblock %}
+    
 
     <a name = "add" id = "add" href="/add">add food</a>
     <br>
     <a href="/view">view my food</a>    
+    <a href="/chat">Chat with bot</a>    
+    
+    
+    
+    <a href="accounts/login/?next=/">Login/Logout</a>    
+    
+
+
+
+    {% if user.is_authenticated %}
+    <p>You are signed in as {{user.email}}</p>
+    <button type="submit"> <a href="logout">Log out</a>
+    </button>
+    {% endif %}
+
+    
     
 
 </body>

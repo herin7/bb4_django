@@ -6,6 +6,8 @@ urlpatterns = [
      path("view/",views.view_food_items,name='view_food_items'),
      path('accounts/', include('allauth.urls')),
      path("logout",views.logout_view),
-     path("",views.home)
+     path("",views.home),
+     path("chat/",views.chatbot,name='chatbot'),
+   
+   
 ]
-     
