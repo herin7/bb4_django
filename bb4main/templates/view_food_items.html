@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Food Items</title>
-</head>
-<body>
+{% extends "layout.html" %}
+         
+    
+{% block body %}
     <h1>Food Items</h1>
+
+    <!--TABLE 1-->
     <ul>
         {% for food_item in food_items %}
             {% if food_item.user == request.user %}
@@ -18,36 +16,38 @@
         {% endfor %}
     </ul>
  
-    <ul>
-        {% for food_item in food_items %}
-            {% if food_item.user == request.user %}
-            {% if current %}
-            <h1>Alert!</h1>
-           
-
-                <li>name: {{ food_item.product_name }}  type: {{ food_item.product_type }}  Quantity: {{ food_item.quantity }}  Expiry Date: {{ food_item.expiry_date }}</li>
-            {% endif %}
-            {% endif %}
-        {% empty %}
-            <li>No food items available</li>
-        {% endfor %}
-    </ul>
 
 
 
 <ul>
-    
+    <!--TABLE 2-->
 
 
-
-    {% for food_item in food_items %}
-    {% if food_item.user == request.user and current %}
-<h1>heruin</h1>
-         heruiin
-
-        <li>name: {{ food_item.product_name }}  type: {{ food_item.product_type }}  Quantity: {{ food_item.quantity }}  Expiry Date: {{ food_item.expiry_date }}</li>
-    {% endif %}
-    {% endfor %}
+    {% if expired_food_items %}
+    <h2>Expired Food Items</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for food_item in expired_food_items %}
+                <tr>
+                    <td>{{ food_item.product_name }}</td>
+                    <td>{{ food_item.product_type }}</td>
+                    <td>{{ food_item.quantity }}</td>
+                    <td>{{ food_item.expiry_date }}</td>
+                </tr>
+            {% empty %}
+                <tr><td>No expired food items</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
 
 
 
@@ -58,7 +58,4 @@
 
 
 
-
-
-</body>
-</html>
+{% endblock %}
