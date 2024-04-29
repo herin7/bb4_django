@@ -29,6 +29,8 @@ ALLOWED_HOSTS = ['127.0.0.1']
 SITE_ID = 3
 
 # Application definition
+STATIC_URL = "/static/"
+STATIC_ROOT = "staticfiles"
 
 INSTALLED_APPS = [ 
     'bb4main',
