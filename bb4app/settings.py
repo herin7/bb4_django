@@ -156,5 +156,7 @@ AUTHENTICATION_BACKENDS = {
 }
 
 
-LOGIN_REDIRECT_URL = '/add/'
+LOGIN_REDIRECT_URL = '/view/'
+LOGIN_URL = '/accounts/login/'
+
 LOGOUT_REDIRECT_URL = "/"
