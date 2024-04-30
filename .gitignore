@@ -4,3 +4,4 @@ client_secret_file
 pipfile.lock
 .venv
 gen-lang-client-0308490624-498c561275d3.json
+config.private.ini
