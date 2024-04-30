@@ -6,5 +6,9 @@
 a{
     font-family: 'Times New Roman', Times, serif;   
     font-weight: bold;   
-       
+    
+}
+
+button{
+    border-color: aquamarine;
 }

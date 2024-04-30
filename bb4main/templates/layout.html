@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
-
+  
 
     
     <title>Document</title>
 </head>
 <body>
 
-
+     <!---->
     <!--TARAL ADD NAVBAR & ALL FRONTEND HERE NOT IN BLOCK BODY & END BLOCK........MI >>>>CSK FOREVER  -->
     {% block body %}
 
@@ -27,21 +27,16 @@
     <br>
     <a href="/view">view my food</a>    
     <a href="/chat">Chat with bot</a>    
-    
-    
-    
-    <a href="accounts/login/?next=/">Login/Logout</a>    
-    
 
 
 
     {% if user.is_authenticated %}
-    <p>You are signed in as {{user.email}}</p>
-    <button type="submit"> <a href="logout">Log out</a>
-    </button>
-    {% endif %}
-
-    
+    <p>You are signed in as {{ user.email }}</p>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log out</button>
+    </form>
+{% endif %}
     
 
 </body>
