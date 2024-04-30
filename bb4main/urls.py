@@ -8,6 +8,5 @@ urlpatterns = [
       path('logout/', views.logout_view, name='logout'),
      path("",views.home),
      path("chat/",views.chatbot,name='chatbot'),
-   
-   
+    
 ]
