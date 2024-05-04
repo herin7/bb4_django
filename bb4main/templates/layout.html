@@ -7,47 +7,37 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
-  
-
-    
+    <link rel="stylesheet" href="{% static 'navbar.css' %}">
     <title>Document</title>
+   
 </head>
 <body>
 
-     <!---->
-    <!--TARAL ADD NAVBAR & ALL FRONTEND HERE NOT IN BLOCK BODY & END BLOCK........MI >>>>CSK FOREVER  -->
-    {% block body %}
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="brand">
+                <a href="/">BB4</a>
+            </div>
+            <ul class="nav-links">
+                <!-- Display appropriate links based on user authentication status -->
+                {% if user.is_authenticated %}
+                    <li><a href="/add">Add Food</a></li>
+                    <li><a href="/view">View Food</a></li>
+                    <li><a href="/chat">Chatbot</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% provider_login_url 'google' %}">Sign In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
 
-
-
-    
-
-    
-    {% endblock %} 
-     {% if user.is_authenticated == False %}
-
-    <h1>You have logged Out</h1>
-    <a href="{% provider_login_url 'google' %}">{% trans "Sign In Via Google" %}</a>
-     
-    {% endif %}
-
-
-
-    {% if user.is_authenticated %}
-    <a name = "/add" id = "add" href="/add">add food</a>
-    <br>
-    <a href="/view">view my food</a>    
-    <a href="/chat">Chat with bot</a>    
-  
-    <a href="/">Home</a> 
-    <p>You are signed in as {{ user.email }}</p>
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Log out</button>
-    </form>
-       
-{% endif %}
-    
+    <!-- Main Content -->
+    <div class="main-content">
+        {% block body %}
+        {% endblock %} 
+    </div>
 
 </body>
 </html>
