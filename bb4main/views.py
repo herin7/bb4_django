@@ -23,24 +23,21 @@ genai.configure(api_key=os.getenv("API_KEY"))
 generation_config = {"temperature": 0.9, "top_p": 1, "top_k": 1, "max_output_tokens": 2048}
 model = genai.GenerativeModel("gemini-pro", generation_config=generation_config)
 
-
 def home(request):
-    return redirect('/view')
+    return render(request, 'layout.html')
 
-def logout_view(request):
+def logout_user(request):
     logout(request)
-    return render(request,'home.html')
-
+    return render(request, 'layout.html')
 
 @login_required
 def view_food_items(request):
     food_items = FoodItem.objects.filter(user=request.user)
     expired_food_items = [item for item in food_items if item.expiry_date < datetime.date.today()]
     return render(request, 'view_food_items.html', {'food_items': food_items, 'expired_food_items': expired_food_items})
- 
 
 @login_required
-def save_fooditem(request):
+def save_food_item(request):
     if request.method == 'POST':
         product_name = request.POST.get('product_name')
         product_type = request.POST.get('product_type')
@@ -49,12 +46,11 @@ def save_fooditem(request):
 
         fooditem = FoodItem.objects.create(user=request.user, product_name=product_name, product_type=product_type, quantity=quantity, expiry_date=expiry_date)
 
-        return redirect('/view')  # Redirect to a success page
+        return redirect('view_food_items')  # Redirect to a success page
     return render(request, 'add_food_item.html')
 
-
 @login_required
-def chatbot(request):
+def chat_bot(request):
     user_input = request.POST.get('user-input', '')
     food_items = FoodItem.objects.filter(user=request.user)
     food_item_details = "\n".join([f"{item.product_name} - Quantity: {item.quantity}, Expiry Date: {item.expiry_date}" for item in food_items])
@@ -64,4 +60,3 @@ def chatbot(request):
     response = model.generate_content([merged_input])
     chatbot_response = response.text
     return render(request, 'chatbot.html', {'response': chatbot_response})
-

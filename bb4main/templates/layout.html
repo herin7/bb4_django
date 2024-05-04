@@ -1,3 +1,6 @@
+{% load i18n %}
+{% load allauth account %}
+{% load socialaccount %} 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,22 +23,29 @@
     
 
     
-    {% endblock %}
-    
+    {% endblock %} 
+     {% if user.is_authenticated == False %}
 
-    <a name = "/add" id = "add" href="/add">add food</a>
-    <br>
-    <a href="/view">view my food</a>    
-    <a href="/chat">Chat with bot</a>    
+    <h1>You have logged Out</h1>
+    <a href="{% provider_login_url 'google' %}">{% trans "Sign In Via Google" %}</a>
+     
+    {% endif %}
 
 
 
     {% if user.is_authenticated %}
+    <a name = "/add" id = "add" href="/add">add food</a>
+    <br>
+    <a href="/view">view my food</a>    
+    <a href="/chat">Chat with bot</a>    
+  
+    <a href="/">Home</a> 
     <p>You are signed in as {{ user.email }}</p>
     <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
         <button type="submit">Log out</button>
     </form>
+       
 {% endif %}
     
 
