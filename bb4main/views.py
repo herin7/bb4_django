@@ -56,7 +56,7 @@ def chat_bot(request):
     food_item_details = "\n".join([f"{item.product_name} - Quantity: {item.quantity}, Expiry Date: {item.expiry_date}" for item in food_items])
     merged_input = user_input + "\n\nList of your food items:\n" + food_item_details
     default_input = "Answer user's question only after analyzing the food items."
-       # Define a detailed default prompt for developers
+   
     developer_prompt = ("Ensure that the You provides informative responses based on user inquiries related to "
                     "food inventory management. Analyze user input to provide relevant details about food items, such as "
                     "quantity, expiry date, and any other relevant information. Strive to assist users in managing their "
