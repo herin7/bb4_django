@@ -1,0 +1,13 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth account %}
+{% load socialaccount %} <!-- Add this line to load socialaccount tags -->
+{% block head_title %}
+    {% trans "Sign In" %}
+{% endblock head_title %}
+{% block content %}
+       {% if SOCIALACCOUNT_ENABLED %}
+        <h2>Google login</h2>
+        <a href="{% provider_login_url 'google' %}">Login with Google</a>
+    {% endif %}
+{% endblock content %}

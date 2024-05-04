@@ -1,0 +1,16 @@
+
+{% load i18n %}
+{% load allauth account %}
+{% load socialaccount %} 
+{% block head_title %}
+{% trans "Sign In With Google" %}
+{% endblock head_title %}
+{% block content %}
+  {% if SOCIALACCOUNT_ENABLED %}
+    <h2>Google login</h2>
+    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+  {% endif %}
+  {% element form method="post" no_visible_fields=True action=request.path %}
+
+  {% endelement %}
+{% endblock content %}

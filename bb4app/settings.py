@@ -50,14 +50,9 @@ INSTALLED_APPS = [
 
 
 SOCIALACCOUNT_PROVIDERS = {
-    "google" :{
-        "SCOPE" :[
-            "profile",
-            "email",
-
-
-        ],
-        "AUTH_PARAMS" : {"access_type" : "online"}
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
     }
 }
 
@@ -79,7 +74,10 @@ ROOT_URLCONF = 'bb4app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',  # Add project-wide templates directory
+            BASE_DIR / 'bb4main' / 'templates',  # Add application-specific templates directory
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,7 +154,8 @@ AUTHENTICATION_BACKENDS = {
 }
 
 
-LOGIN_REDIRECT_URL = '/view/'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
 
-LOGOUT_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/logout"
+SOCIALACCOUNT_LOGIN_ON_GET=True
