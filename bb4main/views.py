@@ -12,7 +12,7 @@ import configparser
 
 # Read API key from the configuration file
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('config.private.ini')
 api_key = config['GENAI']['API_KEY']
 credentials_file_path = config['GENAI']['CREDENTIALS_FILE_PATH']
 
@@ -56,7 +56,13 @@ def chat_bot(request):
     food_item_details = "\n".join([f"{item.product_name} - Quantity: {item.quantity}, Expiry Date: {item.expiry_date}" for item in food_items])
     merged_input = user_input + "\n\nList of your food items:\n" + food_item_details
     default_input = "Answer user's question only after analyzing the food items."
-    merged_input += "\n\n" + default_input
+       # Define a detailed default prompt for developers
+    developer_prompt = ("Ensure that the You provides informative responses based on user inquiries related to "
+                    "food inventory management. Analyze user input to provide relevant details about food items, such as "
+                    "quantity, expiry date, and any other relevant information. Strive to assist users in managing their "
+                    "inventory efficiently by offering accurate and helpful responses to their queries.")
+    
+    merged_input += "\n\n" + default_input + "\n\n" + developer_prompt
     response = model.generate_content([merged_input])
     chatbot_response = response.text
     return render(request, 'chatbot.html', {'response': chatbot_response})

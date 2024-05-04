@@ -1,34 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot</title>
-</head>
-<body>
+{% extends "layout.html" %}
+    
+{% block body %}
+
+    <!-- Chatbot Interface -->
     <h1>Chatbot</h1>
-    <form action="{% url 'chatbot' %}" method="post">
+    <!-- Form for user input -->
+    <form class="chatbot-form" action="{% url 'chatbot' %}" method="post">
         {% csrf_token %}
         <label for="user-input">Your message:</label><br>
+        <!-- Input field for user messages -->
         <input type="text" name="user-input" id="user-input" placeholder="Type your message here" autofocus><br><br>
+        <!-- Button to submit user message -->
         <button type="submit">Send</button>
     </form>
+
+    <!-- Display Chatbot Response -->
     {% if response %}
-    <h2>Chatbot Response</h2>
-    <p>{{ response }}</p>
+        <h2>Chatbot Response</h2>
+        <!-- Display chatbot response -->
+        <p>{{ response }}</p>
     {% endif %}
 
+    <!-- JavaScript for Voice Input -->
     <script>
+        // Function to record voice input
         function record() {
+            // Create a new SpeechRecognition object
             var recognition = new webkitSpeechRecognition();
+            // Set language for speech recognition
             recognition.lang = "en-GB";
 
+            // Event handler for recognition result
             recognition.onresult = function (event) {
+                // Log recognition event
                 console.log(event);
+                // Set the value of user-input field to the transcribed speech
                 document.getElementById("user-input").value = event.results[0][0].transcript;
             }
+            // Start speech recognition
             recognition.start();
         }
     </script>
-</body>
-</html>
+
+{% endblock %}

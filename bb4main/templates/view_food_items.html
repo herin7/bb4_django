@@ -1,62 +1,52 @@
 {% extends "layout.html" %}
-         
+
 {% load allauth %}
-    
+
 {% block body %}
     <h1>Food Items</h1>
 
-    <!--TABLE 1-->
+    <!-- List of Food Items -->
     <ul>
         {% for food_item in food_items %}
             {% if food_item.user == request.user %}
-
-                <li>name: {{ food_item.product_name }}  type: {{ food_item.product_type }}  Quantity: {{ food_item.quantity }}  Expiry Date: {{ food_item.expiry_date }}</li>
+                <!-- Display each food item -->
+                <li>Name: {{ food_item.product_name }} | Type: {{ food_item.product_type }} | Quantity: {{ food_item.quantity }} | Expiry Date: {{ food_item.expiry_date }}</li>
             {% endif %}
         {% empty %}
+            <!-- Display if no food items are available -->
             <li>No food items available</li>
         {% endfor %}
     </ul>
- 
 
-
-
-<ul>
-    <!--TABLE 2-->
-
-
-    {% if expired_food_items %}
-    <h2>Expired Food Items</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Quantity</th>
-                <th>Expiry Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for food_item in expired_food_items %}
-                <tr>
-                    <td>{{ food_item.product_name }}</td>
-                    <td>{{ food_item.product_type }}</td>
-                    <td>{{ food_item.quantity }}</td>
-                    <td>{{ food_item.expiry_date }}</td>
-                </tr>
-            {% empty %}
-                <tr><td>No expired food items</td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
-
-
-
-</ul>
-
-
-
-
-
-
+    <!-- Display Expired Food Items -->
+    <ul>
+        {% if expired_food_items %}
+            <h2>Expired Food Items</h2>
+            <!-- Table for expired food items -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for food_item in expired_food_items %}
+                        <!-- Display each expired food item -->
+                        <tr>
+                            <td>{{ food_item.product_name }}</td>
+                            <td>{{ food_item.product_type }}</td>
+                            <td>{{ food_item.quantity }}</td>
+                            <td>{{ food_item.expiry_date }}</td>
+                        </tr>
+                    {% empty %}
+                        <!-- Display if no expired food items -->
+                        <tr><td>No expired food items</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </ul>
 {% endblock %}

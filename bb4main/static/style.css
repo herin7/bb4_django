@@ -12,3 +12,58 @@ a{
 button{
     border-color: aquamarine;
 }
+
+
+/* chatbot.css */
+
+/* Style for the chatbot container */
+.chatbot-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Style for the chatbot title */
+.chatbot-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Style for the chatbot form */
+.chatbot-form {
+    margin-bottom: 20px;
+}
+
+/* Style for the user input field */
+#user-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style for the submit button */
+.chatbot-submit {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for the chatbot response */
+.chatbot-response {
+    margin-top: 20px;
+}
+
+/* Style for the chatbot response message */
+.chatbot-response p {
+    font-size: 16px;
+}
+

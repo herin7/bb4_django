@@ -1,0 +1,50 @@
+/* Navbar styles */
+.navbar {
+    background-color: #007bff; /* Navbar background color */
+    color: #fff; /* Navbar text color */
+    padding: 10px 0;
+}
+
+/* Container styles */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Brand logo or name styles */
+.brand a {
+    color: #fff; /* Brand text color */
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Navigation links styles */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.nav-links li:last-child {
+    margin-right: 0;
+}
+
+.nav-links li a {
+    color: #fff; /* Link text color */
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-links li a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
