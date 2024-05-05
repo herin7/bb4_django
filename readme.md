@@ -32,3 +32,76 @@ To make the chatbot work in the BB4 Django project, you need to add your own API
 
 ### Start the Server:
 1. Run the Django server.
+
+
+## Guide for Gemini
+1. run this code first in terminal to install GEMINI in your project:
+
+    ```python
+    pip install google-generativeai
+    ```
+2. Add Your own Gemini API Key in config.ini file under Section [GENAI]
+3. Add following lines.
+
+    ```ini
+    [GENAI]
+    API_KEY = YOUR_GEMINI_API_KEY
+    CREDENTIALS_FILE_PATH = PATH_TO_GEN_LANG_CLIENT_JSON_FILE
+    ```
+
+#### For Text to Text Prompt
+
+Gemini-pro version is used to generate prompt from Text,
+
+1. Import Gemini-pro model with this:
+    ```python
+    model = genai.GenerativeModel("gemini-pro")
+    ```
+
+currently prompt is asked from user from console via this method
+
+```python
+prompt = input("What Kind of Dish You want to make? : ")
+```
+
+can be linked with frontend with dJango for Dynamic Propmts.
+
+and the content is generated through prompt is by this method
+
+```python
+response = model.generate_content(f"How Do you make {prompt}")
+```
+
+Then the response can be used anywhere.
+
+### For Image to Text Prompt
+
+Gemini-pro-vision is used for the task for multimodal stream.
+
+1. Import gemini-pro-vision:
+
+    ```python
+    model = genai.GenerativeModel('gemini-pro-vision')
+    ```
+
+2. Import your image: 
+
+    ```python
+    import PIL.Image
+    img = PIL.Image.open('(Path to your Image.)')
+    ```
+
+3. Propmt to Gemini AI
+
+    ```python
+    response = model.generate_content(["Derive The Text", img], stream=True)
+    response.resolve()
+    ```
+
+4. Get the response via ```Response.text``` And use it anywhere you want
+
+
+
+
+
+
