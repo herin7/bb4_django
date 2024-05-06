@@ -9,15 +9,17 @@
 
 :root{
     --primary-color : #F1EFE7;
-    --secondary-color : #00BF63;
+    --secondary-color : #409380;
 
 }
 
 /* Navbar styles */
 .navbar {
-    background-color: var(--secondary-color); /* Navbar background color */
-    color: #fff; /* Navbar text color */
-    padding: 15px 25px;
+    /* background-color: var(--secondary-color);  */
+    /* color: #fff;  */
+    background: var(--primary-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    padding: 25px 25px;
 }
 
 /* Container styles */
@@ -31,7 +33,8 @@
 
 /* Brand logo or name styles */
 .brand a {
-    color: #fff; /* Brand text color */
+    color: var(--secondary-color);
+    /* Brand text color */
     font-size: 26px;
     font-weight: 700;
     text-decoration: none;
@@ -54,7 +57,7 @@
 }
 
 .nav-links li a {
-    color: #fff; /* Link text color */
+    color: var(--secondary-color);/* Link text color */
     text-decoration: none;
     font-size: 16px;
     font-weight: 600;
@@ -69,11 +72,10 @@
     top: 130%;
     bottom: 0;
     left: 0;
-    background: white;
+    background: var(--secondary-color);
     transition: 0.3s;
     transform: scaleX(0);
 }
 .nav-links li a:hover::after{
     transform: scaleX(1);
 }
-
