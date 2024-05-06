@@ -1,8 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+:root{
+    --primary-color : #F1EFE7;
+    --secondary-color : #00BF63;
+
+}
+
 /* Navbar styles */
 .navbar {
-    background-color: #007bff; /* Navbar background color */
+    background-color: var(--secondary-color); /* Navbar background color */
     color: #fff; /* Navbar text color */
-    padding: 10px 0;
+    padding: 15px 25px;
 }
 
 /* Container styles */
@@ -10,16 +25,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
     padding: 0 20px;
 }
 
 /* Brand logo or name styles */
 .brand a {
     color: #fff; /* Brand text color */
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 26px;
+    font-weight: 700;
     text-decoration: none;
 }
 
@@ -42,9 +56,24 @@
 .nav-links li a {
     color: #fff; /* Link text color */
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 600;
+    position: relative;
 }
 
-.nav-links li a:hover {
-    text-decoration: underline; /* Underline on hover */
+.nav-links li a::after{
+    content: '';
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    top: 130%;
+    bottom: 0;
+    left: 0;
+    background: white;
+    transition: 0.3s;
+    transform: scaleX(0);
 }
+.nav-links li a:hover::after{
+    transform: scaleX(1);
+}
+

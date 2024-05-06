@@ -1,31 +1,43 @@
-{% extends "layout.html" %}
-    
-{% block body %}
+<div class="add-food-container">
+  {% extends "layout.html" %} {% load static %} {% block body %}
 
-    <!-- Title -->
-    <h1>Add Food Item</h1>
-
+  <!-- Title -->
+  <div class="add-food-item">
     <!-- Form for Adding Food Item -->
-    <form method="post" action="{% url 'save_food_item' %}">
-        {% csrf_token %}
-        <!-- Product Name Field -->
-        <label for="product_name">Product Name:</label>
-        <input type="text" id="product_name" name="product_name"><br>
+    <form
+      method="post"
+      action="{% url 'save_food_item' %}"
+      class="add-food-item-form"
+    >
+      <h1>Add Food Item</h1>
 
-        <!-- Product Type Field -->
-        <label for="product_type">Product Type:</label>
-        <input type="text" id="product_type" name="product_type"><br>
 
-        <!-- Quantity Field -->
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity"><br>
+      
+      {% csrf_token %}
+      <!-- Product Name Field -->
+      <div class="row">
+        <input type="text" id="product_name" name="product_name" placeholder="Product Name" required/> 
+      </div>
 
-        <!-- Expiry Date Field -->
-        <label for="expiry_date">Expiry Date:</label>
-        <input type="date" id="expiry_date" name="expiry_date"><br>
+      <!-- Product Type Field -->
+      <div class="row">
+        <input type="text" id="product_type" name="product_type" placeholder="Product Type" required/>
+      </div>
 
-        <!-- Submit Button -->
-        <button type="submit">Submit</button>
+      <!-- Quantity Field -->
+      <div class="row">
+        <input type="number" id="quantity" name="quantity" placeholder="Quantity" required/>
+      </div>
+
+      <!-- Expiry Date Field -->
+      <div class="row">
+        <input type="date" id="expiry_date" name="expiry_date" placeholder="Expiry date" required/>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" id="add-submit">Submit</button>
     </form>
+  </div>
 
-{% endblock %}
+  {% endblock %}
+</div>

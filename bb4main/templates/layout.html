@@ -1,43 +1,39 @@
-{% load i18n %}
-{% load allauth account %}
-{% load socialaccount %} 
+{% load i18n %} {% load allauth account %} {% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'navbar.css' %}" />
     <title>Document</title>
-   
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="container">
-            <div class="brand">
-                <a href="/">BB4</a>
-            </div>
-            <ul class="nav-links">
-                <!-- Display appropriate links based on user authentication status -->
-                {% if user.is_authenticated %}
-                    <li><a href="/add">Add Food</a></li>
-                    <li><a href="/view">View Food</a></li>
-                    <li><a href="/chat">Chatbot</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% provider_login_url 'google' %}">Sign In</a></li>
-                {% endif %}
-            </ul>
+      <div class="container">
+        <div class="brand">
+          <a href="/">Logo</a>
         </div>
+        <ul class="nav-links">
+          <!-- Display appropriate links based on user authentication status -->
+          {% if user.is_authenticated %}
+          <li><a href="/add">Add Food</a></li>
+          <li><a href="/view">View Food</a></li>
+          <li><a href="/chat">Chatbot</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% provider_login_url 'google' %}">Sign In</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </nav>
 
     <!-- Main Content -->
     <div class="main-content">
-        {% block body %}
-        {% endblock %} 
+        {% block body %} 
+        
+        {% endblock %}
     </div>
-
-</body>
+  </body>
 </html>
