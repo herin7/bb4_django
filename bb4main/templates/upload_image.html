@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Image</title>
+</head>
+<body>
+    <h1>Analyze Image</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Upload Image</button>
+    </form>
+
+    <div id="productList"></div>
+
+    <script>
+        const uploadForm = document.getElementById('uploadForm');
+        const productListDiv = document.getElementById('productList');
+
+        uploadForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(uploadForm);
+
+            try {
+                const response = await fetch('/analyze/', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to analyze image');
+                }
+
+                const data = await response.json();
+                const productList = data.product_list;
+                productListDiv.innerHTML = `<h2>Products in Image:</h2><ul>${productList.map(product => <li>${product}</li>).join('')}</ul>`;
+            } catch (error) {
+                console.error(error.message);
+                productListDiv.innerHTML = '<p>Error analyzing image</p>';
+            }
+        });
+    </script>
+</body>
+</html>
