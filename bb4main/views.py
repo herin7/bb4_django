@@ -12,7 +12,7 @@ import configparser
 
 # Read API key from the configuration file
 config = configparser.ConfigParser()
-config.read('config.private.ini')
+config.read('config.ini')
 api_key = config['GENAI']['API_KEY']
 credentials_file_path = config['GENAI']['CREDENTIALS_FILE_PATH']
 
@@ -24,7 +24,7 @@ generation_config = {"temperature": 0.9, "top_p": 1, "top_k": 1, "max_output_tok
 model = genai.GenerativeModel("gemini-pro", generation_config=generation_config)
 
 def home(request):
-    return render(request, 'layout.html')
+    return render(request, 'home.html')
 
 def logout_user(request):
     logout(request)

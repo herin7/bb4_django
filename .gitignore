@@ -6,3 +6,4 @@ pipfile.lock
 gen-lang-client-0308490624-498c561275d3.json
 config.private.ini
 venv
+config.ini
