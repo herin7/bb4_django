@@ -29,7 +29,7 @@ generation_config = {"temperature": 0.9, "top_p": 1, "top_k": 1, "max_output_tok
 model = genai.GenerativeModel("gemini-pro", generation_config=generation_config)
 
 def home(request):
-    return render(request, 'layout.html')
+    return render(request, 'home.html')
 
 def logout_user(request):
     logout(request)
@@ -74,52 +74,52 @@ def chat_bot(request):
 
 
 
-# @login_required
-# def analyze_image_view(request):
-#     if request.method == 'POST' and request.FILES.get('image'):
-#         # Get uploaded image from request
-#         uploaded_image = request.FILES['image']
+@login_required
+def analyze_image_view(request):
+    if request.method == 'POST' and request.FILES.get('image'):
+        # Get uploaded image from request
+        uploaded_image = request.FILES['image']
         
-#         # Save uploaded image to a temporary file
-#         with default_storage.open('temp_image.jpg', 'wb+') as destination:
-#             for chunk in uploaded_image.chunks():
-#                 destination.write(chunk)
+        # Save uploaded image to a temporary file
+        with default_storage.open('temp_image.jpg', 'wb+') as destination:
+            for chunk in uploaded_image.chunks():
+                destination.write(chunk)
 
-#         # Open uploaded image with PIL
-#         img = PIL.Image.open('temp_image.jpg')
+        # Open uploaded image with PIL
+        img = PIL.Image.open('temp_image.jpg')
 
-#         # Initialize GenAI model
-#         model = genai.GenerativeModel('gemini-pro-vision')
+        # Initialize GenAI model
+        model = genai.GenerativeModel('gemini-pro-vision')
 
-#         # Generate text content from image
-#         response = model.generate_content(["Generate a Python list of present products in image,say nothing else", img], stream=True)
-#         response.resolve()
+        # Generate text content from image
+        response = model.generate_content(["Generate a Python list of present products in image,say nothing else", img], stream=True)
+        response.resolve()
 
-#         # Extract text content from response
-#         text_content = response.text
+        # Extract text content from response
+        text_content = response.text
 
-#         # Delete temporary image file
-#         default_storage.delete('temp_image.jpg')
+        # Delete temporary image file
+        default_storage.delete('temp_image.jpg')
 
-#         # Strip extra characters from text content
-#         text_content = text_content.strip('[]')
+        # Strip extra characters from text content
+        text_content = text_content.strip('[]')
 
-#         # Convert the text content to a Python list
-#         product_list = [product.strip().strip("'") for product in text_content.split(',')]
+        # Convert the text content to a Python list
+        product_list = [product.strip().strip("'") for product in text_content.split(',')]
 
-#         # Save each product item to the database
-#         for product_name in product_list:
-#             # Create a FoodItem object for each product
-#             food_item = FoodItem.objects.create(
-#                 user=request.user,
-#                 product_name=product_name,
-#                 product_type='foodddd',  # Fill in with actual product type if available
-#                 quantity='44',  # Fill in with actual quantity if available
-#                 expiry_date='2025-01-01'  # Fill in with actual expiry date if available
-#             )
-#             food_item.save()
+        # Save each product item to the database
+        for product_name in product_list:
+            # Create a FoodItem object for each product
+            food_item = FoodItem.objects.create(
+                user=request.user,
+                product_name=product_name,
+                product_type='foodddd',  # Fill in with actual product type if available
+                quantity='44',  # Fill in with actual quantity if available
+                expiry_date='2025-01-01'  # Fill in with actual expiry date if available
+            )
+            food_item.save()
 
-#         return HttpResponse('Products saved to database successfully!')
-#     else:
-#         return render(request, 'upload_image.html')
+        return HttpResponse('Products saved to database successfully!')
+    else:
+        return render(request, 'upload_image.html')
    

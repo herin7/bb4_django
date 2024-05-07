@@ -4,7 +4,7 @@
 
   <!-- List of Food Items -->
   <div class="food-items added">
-    <h2>Currently stored Food Items</h2>
+    <h2>Available Food Items</h2>
     <!-- Table for expired food items -->
     <table>
       <thead>
@@ -46,6 +46,7 @@
           <th>Type</th>
           <th>Quantity</th>
           <th>Expiry Date</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -56,6 +57,7 @@
           <td>{{ food_item.product_type }}</td>
           <td>{{ food_item.quantity }}</td>
           <td>{{ food_item.expiry_date }}</td>
+          <td><i class="fa-solid fa-trash" style="color: #ff1a1a;text-align: center;"></i></td>
         </tr>
         {% empty %}
         <!-- Display if no expired food items -->
@@ -67,5 +69,7 @@
     </table>
     {% endif %}
   </div>
+
+  <button id="generate-btn">Generate PDF</button>
   {% endblock %}
 </div>
