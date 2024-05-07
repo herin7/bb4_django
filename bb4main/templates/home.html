@@ -1,0 +1,126 @@
+<div class="landing-page-container">
+  {% extends "layout.html" %} {% block body %}
+
+  <section id="homepage-sec1">
+    <div class="col">
+      <h2>
+        Track, Cook, Chat :<br />
+        Your Food, Your Recipes!
+      </h2>
+      <p>
+        Effortlessly manage food expiry dates, track inventory, and unlock
+        culinary creativity with our recipe chatbot. Simplify meal planning and
+        minimize waste. Your kitchen's new best friend!
+      </p>
+      <div class="btns-box" style="z-index: 2">
+        <button><a href="/add">Add Food</a></button>
+        <button><a href="/chat">Access Chatbot</a></button>
+      </div>
+      <div class="pattern">
+        {% load static %}
+        <img src="{%static 'pattern.webp'%}" alt="" />
+      </div>
+    </div>
+    <div class="col">
+      <img src="{%static 'woman.png'%}" alt="" id="imgBox" />
+    </div>
+  </section>
+
+  <section id="homepage-sec2">
+    <div class="col">
+      <div class="row">
+        <h1>How it Works</h1>
+      </div>
+      <div class="row">
+        <h2>It's a simple three step process</h2>
+      </div>
+      <div id="steps-box">
+        <div class="row">
+          <div class="number-box">01.</div>
+          <div class="step-content">
+            <h2>Add Food</h2>
+            <p>Simply add your food details on our add food page!</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="number-box">02.</div>
+          <div class="step-content">
+            <h2>View Food</h2>
+            <p>
+              You can view all your stored food items where expired items are
+              removed!
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="number-box">03.</div>
+          <div class="step-content">
+            <h2>Access Chatbot</h2>
+            <p>Just give a prompt to our chat bot and get your answer!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="img-box">
+      {%load static%}
+      <img src="{%static 'app_preview (1).png'%}" alt="" />
+    </div>
+  </section>
+
+  <section id="homepage-sec3">
+    <h1>Features</h1>
+    <div class="features-box">
+      <div class="box" id="box1">
+        <div class="icon-box">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="col">
+          <h2>AI Powered</h2>
+          <p>
+            Using the latest AI technology, our web-app interprets the data from
+            your avail food, and makes a detailed determination on what can be
+            made from it.
+          </p>
+        </div>
+      </div>
+      <div class="box" id="box2">
+        <div class="icon-box">
+          <i class="fa-solid fa-calendar-days"></i>
+        </div>
+        <div class="col">
+          <h2>Expiry Date Tracker</h2>
+          <p>
+            If the barcode is missing, no problem. You can simply enter the
+            food-items manually
+          </p>
+        </div>
+      </div>
+      <div class="box" id="box3">
+        <div class="icon-box">
+          <i class="fa-solid fa-kitchen-set"></i>
+        </div>
+        <div class="col">
+          <h2>Recipe Generator</h2>
+          <p>
+            We enabled the usage of latest tech such that one can get the recipe
+            of the stuffs that can be made from available food items.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer
+    class="landing-page-footer"
+    style="
+      padding: 35px;
+      background: black;
+      color: white;
+      text-align: center;
+      font-weight: 600;
+      font-size: 20px;
+    "
+  >
+    <p>&copy; Project by BinaryBuddies</p>
+  </footer>
+  {% endblock %}
+</div>

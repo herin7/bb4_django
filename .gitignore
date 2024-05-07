@@ -1,0 +1,11 @@
+client_secret_file
+.vscode/     
+.idea/       
+pipfile.lock
+.venv
+gen-lang-client-0308490624-498c561275d3.json
+config.private.ini
+venv
+herinenv
+.herinenv
+config.ini

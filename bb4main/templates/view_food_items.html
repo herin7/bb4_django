@@ -1,0 +1,75 @@
+<div class="view-food-items-container">
+  {% extends "layout.html" %} {% load allauth %} {% block body %}
+  <!-- <h1>Food Items</h1> -->
+
+  <!-- List of Food Items -->
+  <div class="food-items added">
+    <h2>Available Food Items</h2>
+    <!-- Table for expired food items -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Quantity</th>
+          <th>Expiry Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for food_item in food_items %}
+        <!-- Display each expired food item -->
+        <tr>
+          <td>{{ food_item.product_name }}</td>
+          <td>{{ food_item.product_type }}</td>
+          <td>{{ food_item.quantity }}</td>
+          <td>{{ food_item.expiry_date }}</td>
+        </tr>
+        {% empty %}
+        <!-- Display if no expired food items -->
+        <tr>
+          <td>No expired food items</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Display Expired Food Items -->
+  <div class="food-items expired">
+    {% if expired_food_items %}
+    <h2>Expired Food Items</h2>
+    <!-- Table for expired food items -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Quantity</th>
+          <th>Expiry Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for food_item in expired_food_items %}
+        <!-- Display each expired food item -->
+        <tr>
+          <td>{{ food_item.product_name }}</td>
+          <td>{{ food_item.product_type }}</td>
+          <td>{{ food_item.quantity }}</td>
+          <td>{{ food_item.expiry_date }}</td>
+          <td><i class="fa-solid fa-trash" style="color: #ff1a1a;text-align: center;"></i></td>
+        </tr>
+        {% empty %}
+        <!-- Display if no expired food items -->
+        <tr>
+          <td>No expired food items</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+
+  <button id="generate-btn">Generate PDF</button>
+  {% endblock %}
+</div>

@@ -1,0 +1,64 @@
+{% load i18n %} {% load allauth account %} {% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'navbar.css' %}" />
+    <title>BestBfor : Official page</title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+<header>
+  <nav class="navbar">
+    <a href="/" class="brand"><img src="{%static 'bb4_logo_small (1).png'%}" id="logo" ></a>
+    <button id="menu-icon" class="button-icon"><i class="fa-solid fa-bars"></i></button>
+    <ul class="nav-links">
+      {% if user.is_authenticated %}
+      <li><a href="/add">Add Food</a></li>
+      <li><a href="/view">View Food</a></li>
+      <li><a href="/chat">Chatbot</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li><a href="{% provider_login_url 'google' %}">Sign In</a></li>
+      {% endif %}
+    </ul>
+    <ul class="sidebar">
+      <button id="cancel-icon" class="button-icon"><i class="fa-solid fa-xmark"></i></button>
+      {% if user.is_authenticated %}
+      <li><a href="/add">Add Food</a></li>
+      <li><a href="/view">View Food</a></li>
+      <li><a href="/chat">Chatbot</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li><a href="{% provider_login_url 'google' %}">Sign In</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        {% block body %} 
+        
+        {% endblock %}
+    </div>
+  </body>
+  <script src="https://kit.fontawesome.com/ddcbebe630.js" crossorigin="anonymous"></script>
+  <script>
+    const menu = document.getElementById("menu-icon");
+    const cancel = document.getElementById("cancel-icon");
+    const sidebar = document.querySelector(".sidebar");
+    
+    menu.addEventListener("click",()=>{
+      sidebar.style.right = "0%";
+    })
+    
+    cancel.addEventListener("click",()=>{
+      sidebar.style.right = "-100%";
+    })
+    
+  </script>
+</html>
