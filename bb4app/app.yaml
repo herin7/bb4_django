@@ -1,0 +1,7 @@
+runtime: python39
+entrypoint: gunicorn -b :$PORT bb4app.wsgi
+env_variables:
+  DJANGO_SETTINGS_MODULE: "bb4app.settings"
+handlers:
+- url: /static
+  static_dir: static

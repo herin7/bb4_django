@@ -1,0 +1,127 @@
+{% load i18n %} {% load allauth account %} {% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}" />
+  <link rel="stylesheet" href="{% static 'navbar.css' %}" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+
+  <title>BestBfor : Official page</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+    :root {
+      --primary-color: #fffcfb;
+      --secondary-color: #409380;
+    }
+
+    .dropbtn {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 10px;
+      font-size: 56px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Style the dropdown content */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--primary-color);
+      min-width: 110px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      text-align: center;
+    }
+
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+
+
+
+
+    span {
+      font-size: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="/" class="brand"><img src="{%static 'bb4_logo_small (1).png'%}" id="logo"></a>
+      <button id="menu-icon" class="button-icon"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links">
+        {% if user.is_authenticated %}
+        <li><a href="/add">Add Food</a></li>
+        <li><a href="/view">View Food</a></li>
+        <li><a href="/chat">Chatbot</a></li>
+        <li><a href="/analyze">Scan to add</a></li>
+
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li>
+          <div class="dropdown">
+            <button class="dropbtn"><span>Sign in</span></button>
+            <div class="dropdown-content">
+              <a href="{% provider_login_url 'github' %}">GitHub</a>
+              <a href="{% provider_login_url 'google' %}">Google</a>
+
+
+            </div>
+          </div>
+        </li>
+
+        {% endif %}
+      </ul>
+      <ul class="sidebar">
+        <button id="cancel-icon" class="button-icon"><i class="fa-solid fa-xmark"></i></button>
+        {% if user.is_authenticated %}
+        <li><a href="/add">Add Food</a></li>
+        <li><a href="/view">View Food</a></li>
+        <li><a href="/chat">Chatbot</a></li>
+        <li><a href="/analyze">Scan to add</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li>
+        <li><a href="{% provider_login_url 'google' %}">Sign In with Google</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    {% block body %}
+
+    {% endblock %}
+  </div>
+</body>
+<script src="https://kit.fontawesome.com/ddcbebe630.js" crossorigin="anonymous"></script>
+<script>
+  const menu = document.getElementById("menu-icon");
+  const cancel = document.getElementById("cancel-icon");
+  const sidebar = document.querySelector(".sidebar");
+
+  menu.addEventListener("click", () => {
+    sidebar.style.right = "0%";
+  })
+
+  cancel.addEventListener("click", () => {
+    sidebar.style.right = "-100%";
+  })
+
+</script>
+
+</html>

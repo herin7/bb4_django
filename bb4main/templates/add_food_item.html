@@ -1,0 +1,43 @@
+<div class="add-food-container">
+  {% extends "layout.html" %} {% load static %} {% block body %}
+
+  <!-- Title -->
+  <div class="add-food-item">
+    <!-- Form for Adding Food Item -->
+    <form
+      method="post"
+      action="{% url 'save_food_item' %}"
+      class="add-food-item-form"
+    >
+      <h1>Add Food Item</h1>
+
+
+      
+      {% csrf_token %}
+      <!-- Product Name Field -->
+      <div class="row">
+        <input type="text" id="product_name" name="product_name" placeholder="Product Name" required/> 
+      </div>
+
+      <!-- Product Type Field -->
+      <div class="row">
+        <input type="text" id="product_type" name="product_type" placeholder="Product Type" required/>
+      </div>
+
+      <!-- Quantity Field -->
+      <div class="row">
+        <input type="number" id="quantity" name="quantity" placeholder="Quantity" required/>
+      </div>
+
+      <!-- Expiry Date Field -->
+      <div class="row">
+        <input type="date" id="expiry_date" name="expiry_date" placeholder="Expiry date" required/>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" id="add-submit">Submit</button>
+    </form>
+  </div>
+
+  {% endblock %}
+</div>
