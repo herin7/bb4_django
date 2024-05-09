@@ -17,17 +17,21 @@
       </thead>
       <tbody>
         {% for food_item in food_items %}
-        <!-- Display each expired food item -->
+        <!-- Exclude expired food items from the list -->
+        {% if food_item not in expired_food_items %}
         <tr>
           <td>{{ food_item.product_name }}</td>
           <td>{{ food_item.product_type }}</td>
           <td>{{ food_item.quantity }}</td>
           <td>{{ food_item.expiry_date }}</td>
+          <td><button onclick="deleteFoodItem('{{ food_item.id }}')" class="fa-solid fa-trash" style="color: #ff1a1a;text-align: center;" ></button></td>
+          
         </tr>
+        {% endif %}
         {% empty %}
-        <!-- Display if no expired food items -->
+        <!-- Display if no available food items -->
         <tr>
-          <td>No expired food items</td>
+          <td colspan="4">No available food items</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -57,7 +61,8 @@
           <td>{{ food_item.product_type }}</td>
           <td>{{ food_item.quantity }}</td>
           <td>{{ food_item.expiry_date }}</td>
-          <td><i class="fa-solid fa-trash" style="color: #ff1a1a;text-align: center;"></i></td>
+          <td><button onclick="deleteFoodItem('{{ food_item.id }}')" class="fa-solid fa-trash" style="color: #ff1a1a;text-align: center;" ></button></td>
+          
         </tr>
         {% empty %}
         <!-- Display if no expired food items -->
@@ -70,6 +75,26 @@
     {% endif %}
   </div>
 
+ 
   <button id="generate-btn">Generate PDF</button>
+
+  <script>
+    function deleteFoodItem(itemId) {
+    // Redirect to the delete URL
+    window.location.href = `/delete_food_item/${itemId}/`;
+}
+    document.getElementById("generate-btn").addEventListener("click", function() {
+        var doc = new jsPDF();
+  
+        
+        doc.text("Expired Food Items", 10, 10);
+        doc.autoTable({html: '.food-items.expired table'}); 
+  
+        doc.save("expired_food_items.pdf");
+    });
+  </script>
+  
+
+
   {% endblock %}
 </div>

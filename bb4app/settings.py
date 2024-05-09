@@ -9,6 +9,11 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+from django.contrib.auth.signals import user_logged_in
+from django.dispatch import receiver
+from django.core.mail import send_mail
+from django.conf import settings
+
 import os
 from pathlib import Path
 
@@ -26,13 +31,12 @@ SECRET_KEY = 'django-insecure-4s*l!k#$3__k+vao$gsr+ybji#^%k5z8t0+i7teq3=s1jp09%v
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.29.67']
 SITE_ID = 3
 
 # Application definition
 STATIC_URL = "/static/"
 STATIC_ROOT = "staticfiles"
-
 INSTALLED_APPS = [ 
     'bb4main',
     'django.contrib.admin',
@@ -45,12 +49,18 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.google"
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.github",
+    'crispy_forms',
 ]
 
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+    },
+     'github': {
         'SCOPE': ['profile', 'email'],
         'AUTH_PARAMS': {'access_type': 'online'},
     }
@@ -159,3 +169,21 @@ LOGIN_URL = '/accounts/login/'
 
 LOGOUT_REDIRECT_URL = "/logout"
 SOCIALACCOUNT_LOGIN_ON_GET=True
+
+
+
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST="smtp.gmail.com"
+
+EMAIL_USE_TLS= True
+
+EMAIL_PORT=587
+
+EMAIL_HOST_USER="herinsoni3737@gmail.com"
+
+EMAIL_HOST_PASSWORD="hqqc gwyo narx zbma"

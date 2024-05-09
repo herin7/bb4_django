@@ -7,9 +7,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}" />
     <link rel="stylesheet" href="{% static 'navbar.css' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+
     <title>BestBfor : Official page</title>
   </head>
   <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+
     <!-- Navigation Bar -->
 <header>
   <nav class="navbar">
@@ -20,9 +24,17 @@
       <li><a href="/add">Add Food</a></li>
       <li><a href="/view">View Food</a></li>
       <li><a href="/chat">Chatbot</a></li>
+      <li><a href="/analyze">Scan to add</a></li>
+
       <li><a href="{% url 'logout' %}">Logout</a></li>
       {% else %}
-      <li><a href="{% provider_login_url 'google' %}">Sign In</a></li>
+      <li><a href="#">Sign In <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-content">
+            <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li>
+            <li><a href="{% provider_login_url 'google' %}">Sign In with Google</a></li>
+        </ul>
+    </li>
+
       {% endif %}
     </ul>
     <ul class="sidebar">
@@ -31,9 +43,11 @@
       <li><a href="/add">Add Food</a></li>
       <li><a href="/view">View Food</a></li>
       <li><a href="/chat">Chatbot</a></li>
+      <li><a href="/analyze">Scan to add</a></li>
       <li><a href="{% url 'logout' %}">Logout</a></li>
       {% else %}
-      <li><a href="{% provider_login_url 'google' %}">Sign In</a></li>
+      <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li>
+      <li><a href="{% provider_login_url 'google' %}">Sign In with Google</a></li>
       {% endif %}
     </ul>
   </nav>

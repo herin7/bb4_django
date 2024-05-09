@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@ironsoftware/ironpdf": "^2024.4.2"
+  }
+}

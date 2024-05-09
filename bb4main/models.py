@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.contrib.auth.signals import user_logged_in
+from django.dispatch import receiver
+from django.core.mail import send_mail
+from django.conf import settings
 
 class FoodItem(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=None)
@@ -15,4 +19,3 @@ class FoodItem(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
