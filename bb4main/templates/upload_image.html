@@ -4,44 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analyze Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            align-items: center;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #007bff;
+            align-items: center;
+        }
+
+        #cameraContainer {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        #cameraPreview {
+            width: 100%;
+            border-radius: 5px;
+            border: 2px solid #007bff;
+        }
+
+        #captureButton, #confirmButton {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #captureButton:hover, #confirmButton:hover {
+            background-color: #0056b3;
+        }
+
+        #uploadButton {
+            display: none;
+        }
+
+        #capturedImage {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #instructions {
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>Analyze Image</h1>
-    <form id="uploadForm" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Upload Image</button>
-    </form>
-
-    <div id="productList"></div>
+    <div id="cameraContainer">
+        <video id="cameraPreview" autoplay muted></video>
+        <button id="captureButton">Capture Image</button>
+    </div>
+    <img id="capturedImage" src="#" alt="Captured Image" style="display: none;">
+    <p id="instructions">Click "Capture Image" to turn on your camera and capture an image. Once captured, the image will be displayed below.</p>
+    <button id="confirmButton" style="display: none;">Confirm</button>
 
     <script>
-        const uploadForm = document.getElementById('uploadForm');
-        const productListDiv = document.getElementById('productList');
+        const cameraPreview = document.getElementById('cameraPreview');
+        const captureButton = document.getElementById('captureButton');
+        const capturedImage = document.getElementById('capturedImage');
+        const instructions = document.getElementById('instructions');
+        const confirmButton = document.getElementById('confirmButton');
 
-        uploadForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const formData = new FormData(uploadForm);
-
-            try {
-                const response = await fetch('/analyze/', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to analyze image');
+        // Function to fetch CSRF token from cookie
+        function getCSRFToken() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'csrftoken') {
+                    return value;
                 }
-
-                const data = await response.json();
-                const productList = data.product_list;
-                productListDiv.innerHTML = `<h2>Products in Image:</h2><ul>${productList.map(product => <li>${product}</li>).join('')}</ul>`;
-            } catch (error) {
-                console.error(error.message);
-                productListDiv.innerHTML = '<p>Error analyzing image</p>';
             }
+            return null;
+        }
+
+        // Function to capture image
+        function captureImage() {
+            const canvas = document.createElement('canvas');
+            canvas.width = cameraPreview.videoWidth;
+            canvas.height = cameraPreview.videoHeight;
+            canvas.getContext('2d').drawImage(cameraPreview, 0, 0, canvas.width, canvas.height);
+            capturedImage.src = canvas.toDataURL('image/jpeg');
+            capturedImage.style.display = 'block';
+            confirmButton.style.display = 'block';
+        }
+
+        // Function to send the image to the backend
+        function sendImageToBackend() {
+            // Create FormData object and append captured image
+            const formData = new FormData();
+            formData.append('image', dataURItoBlob(capturedImage.src));
+
+            // Fetch URL and send captured image with CSRF token
+            fetch('/analyze/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken(), // Include CSRF token in request header
+                },
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Handle response data as needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Function to convert data URI to Blob
+        function dataURItoBlob(dataURI) {
+            const byteString = atob(dataURI.split(',')[1]);
+            const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([ab], { type: mimeString });
+        }
+
+        // Event listener for capture button click
+        captureButton.addEventListener('click', () => {
+            captureImage();
         });
+
+        // Event listener for confirm button click
+        confirmButton.addEventListener('click', () => {
+            sendImageToBackend();
+        });
+
+        // Function to handle camera access
+        async function openCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                cameraPreview.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                instructions.innerText = 'Failed to access camera. Please try again.';
+            }
+        }
+
+        // Call openCamera function when the page loads
+        openCamera();
     </script>
 </body>
 </html>

@@ -8,4 +8,6 @@ config.private.ini
 venv
 herinenv
 .herinenv
+node_modules
 config.ini
+bb4-django-62bbd3b3c1ae.json
