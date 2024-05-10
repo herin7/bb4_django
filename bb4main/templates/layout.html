@@ -20,34 +20,38 @@
     <a href="/" class="brand"><img src="{%static 'bb4_logo_small (1).png'%}" id="logo" ></a>
     <button id="menu-icon" class="button-icon"><i class="fa-solid fa-bars"></i></button>
     <ul class="nav-links">
-      {% if user.is_authenticated %}
       <li><a href="/add">Add Food</a></li>
       <li><a href="/view">View Food</a></li>
       <li><a href="/chat">Chatbot</a></li>
       <li><a href="/analyze">Scan to add</a></li>
-
+      {% if user.is_authenticated %}
       <li><a href="{% url 'logout' %}">Logout</a></li>
       {% else %}
-      <li><a href="#">Sign In <i class="fa-solid fa-chevron-down"></i></a>
-        <ul class="dropdown-content">
+      <li id="dropdown-li"><a href="#">Sign In <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-content" type="none">
             <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li>
             <li><a href="{% provider_login_url 'google' %}">Sign In with Google</a></li>
         </ul>
-    </li>
+      </li>
 
       {% endif %}
     </ul>
     <ul class="sidebar">
       <button id="cancel-icon" class="button-icon"><i class="fa-solid fa-xmark"></i></button>
-      {% if user.is_authenticated %}
       <li><a href="/add">Add Food</a></li>
       <li><a href="/view">View Food</a></li>
       <li><a href="/chat">Chatbot</a></li>
       <li><a href="/analyze">Scan to add</a></li>
+      {% if user.is_authenticated %}
       <li><a href="{% url 'logout' %}">Logout</a></li>
       {% else %}
-      <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li>
-      <li><a href="{% provider_login_url 'google' %}">Sign In with Google</a></li>
+      <li id="dropdown-li"><a href="#">Sign In <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-content" type="none">
+            <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li>
+            <li><a href="{% provider_login_url 'google' %}">Sign In with Google</a></li>
+        </ul>
+    </li>
+
       {% endif %}
     </ul>
   </nav>
@@ -65,7 +69,13 @@
     const menu = document.getElementById("menu-icon");
     const cancel = document.getElementById("cancel-icon");
     const sidebar = document.querySelector(".sidebar");
-    
+    const dropdownLi = document.getElementById("dropdown-li")
+    const dropdownContent = document.querySelector(".dropdown-content")
+
+    dropdownLi.addEventListener("click",()=>{
+
+    })
+
     menu.addEventListener("click",()=>{
       sidebar.style.right = "0%";
     })

@@ -718,3 +718,224 @@ button[type="submit"]:hover {
 }
 
 
+.upload-image-container{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-image-container #image-container{
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  padding: 20px 25px;
+  align-items: center;
+  justify-content: center;
+  /* gap: 15px; */
+  /* border-radius: 15px;
+  box-shadow: 0 2px 10px var(--secondary-color); */
+}
+
+.upload-image-container #image-container #cameraContainer{
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px var(--secondary-color);
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.upload-image-container #image-container h1{
+  font-size: 28px;
+  
+}
+.upload-image-container #image-container #previewContainer{
+  font-size: 28px;
+  /* background: black; */
+  max-width: 400px;
+}
+.upload-image-container #image-container #cameraContainer #previewContainer #cameraPreview{
+ width: 100%;
+ border-radius: 5px;
+ margin-bottom: 5px;
+}
+.upload-image-container #image-container #cameraContainer #previewContainer #captureButton{
+ width: 100%;
+ /* border-radius: 15px; */
+ border: 0;
+ outline: 0;
+ padding: 10px 25px;
+ background: var(--secondary-color);
+ color: var(--primary-color);
+ font-size: 18px;
+ font-weight: 600;
+ border-radius: 5px;
+ transition: 0.3s;
+}
+.upload-image-container #image-container #capturedContainer{
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px var(--secondary-color);
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  margin-top: 35px;
+}
+.upload-image-container #image-container #capturedContainer  #capturedImage{
+  max-width: 400px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+.upload-image-container #image-container #cameraContainer #captureButton:hover{
+opacity: 0.8;
+cursor: pointer;
+}
+.upload-image-container #image-container #confirmButton{
+ width: 400px;
+ padding: 10px 25px;
+ background: var(--secondary-color);
+ color: var(--primary-color);
+ font-size: 18px;
+ font-weight: 600;
+ border-radius: 5px;
+ border: 0;
+ outline: 0;
+}
+
+
+/* 
+  .upload-img-container{
+            width: 100%;
+            height: 100vh;
+        }
+        
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height : 100vh;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom : 20px;
+            color: #007bff;
+            align-items: center;
+        }
+
+        #cameraContainer {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        #cameraPreview {
+            width: 100%;
+            border-radius: 5px;
+            border: 2px solid #007bff;
+        }
+
+        #captureButton, #confirmButton {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #captureButton:hover, #confirmButton:hover {
+            background-color: #0056b3;
+        }
+
+        #uploadButton {
+            display: none;
+        }
+
+        #capturedImage {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #instructions {
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+*/
+
+/* Navbar */
+#dropdown-li{
+  position: relative;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 320px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 111;
+  right: 0;
+  top: 102%;
+}
+
+/* Style the dropdown links */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+/* Show the dropdown content when hovering over dropdown */
+#dropdown-li:hover .dropdown-content {
+  display: block;
+}
+
+.sidebar #dropdown-li{
+  position: relative;
+}
+
+.sidebar .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 320px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 111;
+  
+  top: 100%;
+  left: -80%;
+}
+
+/* Style the dropdown links */
+.sidebar .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.sidebar .dropdown-content a:hover {background-color: #f1f1f1;}
+
+/* Show the dropdown content when hovering over dropdown */
+.sidebar #dropdown-li:hover .dropdown-content {
+  display: block;
+}
