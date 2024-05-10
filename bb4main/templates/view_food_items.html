@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="view-food-items-container">
   {% extends "layout.html" %} {% load allauth %} {% block body %}
   <!-- <h1>Food Items</h1> -->
@@ -98,3 +99,124 @@
 
   {% endblock %}
 </div>
+=======
+{% extends "layout.html" %} {% load allauth %} {% block body %}
+<!-- <h1>Food Items</h1> -->
+<div class="b">
+  <button id="generate-btn">Generate PDF</button>
+  <div class="view-food-items-container">
+    <!-- List of Food Items -->
+    <div class="food-items added">
+      <h2>Available Food Items</h2>
+      <!-- Table for expired food items -->
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Expiry Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for food_item in food_items %}
+          <!-- Exclude expired food items from the list -->
+          {% if food_item not in expired_food_items %}
+          <tr>
+            <td>{{ food_item.product_name }}</td>
+            <td>{{ food_item.product_type }}</td>
+            <td>{{ food_item.quantity }}</td>
+            <td>{{ food_item.expiry_date }}</td>
+            <td><button onclick="deleteFoodItem('{{ food_item.id }}')" class="fa-solid fa-trash"
+                style="color: #ff1a1a;text-align: center;"></button></td>
+
+          </tr>
+          {% endif %}
+          {% empty %}
+          <!-- Display if no available food items -->
+          <tr>
+            <td colspan="4">No available food items</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Display Expired Food Items -->
+    <div class="food-items expired">
+      {% if expired_food_items %}
+      <h2>Expired Food Items</h2>
+      <!-- Table for expired food items -->
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Expiry Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for food_item in expired_food_items %}
+          <!-- Display each expired food item -->
+          <tr>
+            <td>{{ food_item.product_name }}</td>
+            <td>{{ food_item.product_type }}</td>
+            <td>{{ food_item.quantity }}</td>
+            <td>{{ food_item.expiry_date }}</td>
+            <td><button onclick="deleteFoodItem('{{ food_item.id }}')" class="fa-solid fa-trash"
+                style="color: #ff1a1a;text-align: center;"></button></td>
+
+          </tr>
+          {% empty %}
+          <!-- Display if no expired food items -->
+          <tr>
+            <td>No expired food items</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+
+
+
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  function deleteFoodItem(itemId) {
+    // Redirect to the delete URL
+    window.location.href = `/delete_food_item/${itemId}/`;
+  }
+
+  function hideButtonOnPrint() {
+    var btn = document.getElementById('generate-btn');
+    btn.style.display = 'none';
+  }
+
+  // Execute PDF generation code when the button is clicked
+  document.getElementById('generate-btn').addEventListener('click', function () {
+    html2pdf()
+      .from(document.querySelector('.view-food-items-container'))
+      .save('food_items.pdf');
+  });
+
+  // Listen for print events to hide the button when printing
+  if (window.matchMedia) {
+    var mediaQueryList = window.matchMedia('print');
+    mediaQueryList.addListener(function (mql) {
+      if (mql.matches) {
+        hideButtonOnPrint();
+      }
+    });
+  } else {
+    window.onbeforeprint = hideButtonOnPrint;
+  }
+</script>
+
+
+
+{% endblock %}
+>>>>>>> origin/main
