@@ -5,10 +5,6 @@ header .navbar {
     justify-content: space-between;
     padding: 5px;
     box-shadow: 0 1px 5px var(--secondary-color);
-<<<<<<< HEAD
-    position: relative;
-=======
->>>>>>> origin/main
   }
   
   .navbar .nav-links {
@@ -61,14 +57,6 @@ header .navbar {
   .nav-links li:last-child {
     margin-right: 0;
   }
-<<<<<<< HEAD
-
-  header .navbar .nav-links #dropdown-li .dropdown-content{
-    display: none;
-
-  }
-=======
->>>>>>> origin/main
   
   #menu-icon {
     display: none;
@@ -77,38 +65,7 @@ header .navbar {
   header .navbar .sidebar{
     display: none;
   }
-<<<<<<< HEAD
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-
-  /* Style the dropdown links */
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #f1f1f1;}
-
-  /* Show the dropdown content when hovering over dropdown */
-  #dropdown-li:hover .dropdown-content {
-    display: block;
-  }
   
-  
-
-=======
-  
->>>>>>> origin/main
   /* Media Query for Responsive Navbar */
   @media (max-width: 750px) {
   
@@ -182,9 +139,5 @@ header .navbar {
         background: var(--secondary-color);
         color: var(--primary-color);
       }
-<<<<<<< HEAD
-  }
-=======
   }
   
->>>>>>> origin/main

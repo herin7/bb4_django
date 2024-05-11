@@ -184,6 +184,6 @@ EMAIL_USE_TLS= True
 
 EMAIL_PORT=587
 
-EMAIL_HOST_USER="herinsoni3737@gmail.com"
+EMAIL_HOST_USER="bestbfore@gmail.com"
 
-EMAIL_HOST_PASSWORD="hqqc gwyo narx zbma"
+EMAIL_HOST_PASSWORD="yrnl obfx tfsj ouve"
