@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.core.files.storage import default_storage
-import pytesseract
 from datetime import datetime, timedelta
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -14,6 +13,7 @@ from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
+import google.ai.generativelanguage as glm
 from .models import FoodItem
 from django.utils import timezone
 import os
@@ -123,20 +123,24 @@ def chat_bot(request):
     food_items = FoodItem.objects.filter(user=request.user)
     food_item_details = "\n".join([f"{item.product_name} - Quantity: {item.quantity}, Expiry Date: {item.expiry_date}" for item in food_items])
     merged_input = user_input + "\n\nList of your food items:\n" + food_item_details
-    default_input = "Answer user's question only after analyzing the food items."
+    default_input = "Hello"
    
-    developer_prompt = ("Ensure that the You provides informative responses based on user inquiries related to "
+    developer_prompt = ("You are beingused as chatbot If you haven't ask anything just greet user , do nothing else if you have been asked question , Ensure that the You provides informative responses based on user inquiries related to "
                     "food inventory management. Analyze user input to provide relevant details about food items, such as "
                     "quantity, expiry date, and any other relevant information. Strive to assist users in managing their "
                     "inventory efficiently by offering accurate and helpful responses to their queries."
-                    "Don't include [' at the start of response","Add obnly food, medicines or anything that human consumes, avoid adding devices,things etc",)
+                    "Answer paragraph wise in points. Well mannered way don't use * in your response "
+                    "Don't include [' at the start of response","Add only food, medicines or anything that human consumes, avoid adding devices,things etc")
                     
                     
     
-    merged_input += "\n\n" + default_input + "\n\n" + developer_prompt
+    merged_input += "\n\n" + str(default_input) + "\n\n" + str(developer_prompt)
+
     response = model.generate_content([merged_input])
     chatbot_response = response.text
     return render(request, 'chatbot.html', {'response': chatbot_response})
+
+
 def analyze_image_view(request):
     if request.method == 'POST' and request.FILES.get('image'):
         uploaded_image = request.FILES['image']
@@ -147,9 +151,9 @@ def analyze_image_view(request):
 
         img = Image.open('temp_image.jpg')
 
-        model = genai.GenerativeModel('gemini-pro-vision')
+        model = genai.GenerativeModel('gemini-1.5-pro-latest')
 
-        response = model.generate_content(["Generate a Python list of present products in image,Responese should not start with __ [' __ or not end with __']__ inventory efficiently by offering accurate and helpful responses to their queries.Don't include '''   ['  ''' at the start of response ,Add only food, medicines or anything that human consumes, avoid adding devices,things etcdon't use any additional text only name of product is the thing you have to tell nothing else like 'this image is of ' don't do any formalities ,say nothing else,", img], stream=True)
+        response = model.generate_content(["Analyze the image , try to understand what is has,Generate a Python list of present products in image Say nothing if there is no product consumed by human in the picture ,Be honest,Responese should not start with __ [' __ or not end with __']__ inventory efficiently by offering accurate and helpful responses to their queries.Don't include '''   ['  ''' at the start of response ,Add only food, medicines or anything that human consumes, avoid adding devices,things etcdon't use any additional text only name of product is the thing you have to tell nothing else like 'this image is of ' don't do any formalities ,say nothing else,", img], stream=True)
         response.resolve()
 
         text_content = response.text
@@ -159,13 +163,21 @@ def analyze_image_view(request):
         text_content = text_content.replace("[", "").replace("]", "").replace(",", "")
         product_list = [product.strip() for product in text_content.split() if product.strip()]
 
+       # Define a dictionary mapping food types to lists of corresponding food items
         type_mapping = {
-            'fruit': ['apple', 'banana', 'pear'],
-            'vegetable': ['lettuce', 'tomato', 'cucumber', 'onion', 'bell pepper'],
-            'dairy': ['milk', 'cheese'],
-            'grain': ['corn', 'bread'],
-            'protein': ['egg', 'chicken', 'beef', 'fish']
+            'fruit': ['apple', 'banana', 'pear', 'orange', 'strawberry', 'grape', 'pineapple', 'kiwi', 'watermelon', 'mango', 'blueberry'],
+            'vegetable': ['lettuce', 'tomato', 'cucumber', 'onion', 'bell pepper', 'carrot', 'broccoli', 'spinach', 'potato', 'zucchini', 'celery'],
+            'dairy': ['milk', 'cheese', 'yogurt', 'butter', 'cream', 'cream cheese', 'sour cream', 'cottage cheese', 'whipped cream'],
+            'grain': ['corn', 'bread', 'rice', 'pasta', 'quinoa', 'oatmeal', 'barley', 'cereal', 'crackers', 'pancakes', 'waffles'],
+            'protein': ['egg', 'chicken', 'beef', 'fish', 'tofu', 'pork', 'lentils', 'beans', 'turkey', 'salmon', 'shrimp', 'steak', 'ham'],
+            'beverage': ['water', 'coffee', 'tea', 'juice', 'soda', 'milkshake', 'smoothie', 'wine', 'beer', 'cocktail', 'lemonade', 'iced tea'],
+            'snack': ['chips', 'popcorn', 'pretzels', 'cookies', 'crackers', 'nuts', 'trail mix', 'granola bar', 'chocolate', 'candy', 'gum'],
+            'sweet': ['cake', 'pie', 'cupcake', 'brownie', 'cookie', 'donut', 'macaron', 'pudding', 'ice cream', 'sorbet', 'gelato', 'frozen yogurt'],
+            'spice': ['salt', 'pepper', 'garlic', 'ginger', 'cinnamon', 'oregano', 'basil', 'thyme', 'paprika', 'cumin', 'curry powder', 'vanilla extract'],
+            'condiment': ['ketchup', 'mustard', 'mayonnaise', 'soy sauce', 'vinegar', 'barbecue sauce', 'ranch dressing', 'salsa', 'honey', 'maple syrup', 'hot sauce'],
+            'miscellaneous': ['pizza', 'sandwich', 'soup', 'salad', 'taco', 'burrito', 'sushi', 'hamburger', 'hot dog', 'fries', 'pasta salad', 'stir fry']
         }
+
  
         for product_name in product_list:
             product_type = 'other'

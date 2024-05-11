@@ -32,3 +32,19 @@ To make the chatbot work in the BB4 Django project, you need to add your own API
 
 ### Start the Server:
 1. Run the Django server.
+
+---
+
+BestBefore is a cutting-edge web application designed to streamline inventory management for users' daily needs, encompassing food, medicine, or any other essentials. The elegantly crafted homepage presents users with intuitive options, including adding items manually or seamlessly scanning them using Google's Gemini API.
+
+In the "Add Food" feature, users can input details such as product name, type, quantity, and expiry date, ensuring meticulous record-keeping. Meanwhile, the "Scan to Add" function utilizes Gemini AI to automatically retrieve product details, setting expiry dates six months from the addition date, thus simplifying data entry.
+
+The application's chatbot empowers users to effortlessly retrieve information from the stored database, enhancing user interaction and accessibility. Built on the Django framework with an SQLite3 database, the implementation ensures efficient data management and scalability.
+
+Security is paramount, with dual authentication systems from Google and Github, safeguarding user accounts with keys from the respective organizations. Furthermore, a "Send Welcome Email" feature automatically welcomes users to the platform, fostering a seamless onboarding experience.
+
+A standout feature is the "Notify Expiry" function, which notifies users via email of expired items, facilitating timely action. Additionally, the "Generate PDF" functionality enables users to print inventory lists directly from the frontend, enhancing convenience.
+
+Moreover, the application boasts a "Delete Food Item" feature, allowing users to easily manage their inventory. BestBefore is accessible across both mobile and desktop devices, ensuring convenience and flexibility for users on the go.
+
+In conclusion, BestBefore sets a new standard in inventory management, offering a comprehensive suite of features combined with intuitive design and robust functionality, making it an indispensable tool for users' daily lives.

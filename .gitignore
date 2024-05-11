@@ -7,7 +7,13 @@ gen-lang-client-0308490624-498c561275d3.json
 config.private.ini
 venv
 herinenv
+site-packages
 .herinenv
 node_modules
 config.ini
 bb4-django-62bbd3b3c1ae.json
+bb4_django\bb4app\__pycache__
+bb4_django\bb4main\__pycache__
+__pycache__
+*.pyc
+*.pyo
