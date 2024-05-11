@@ -140,7 +140,7 @@ def chat_bot(request):
     chatbot_response = response.text
     return render(request, 'chatbot.html', {'response': chatbot_response})
 
-
+@login_required
 def analyze_image_view(request):
     if request.method == 'POST' and request.FILES.get('image'):
         uploaded_image = request.FILES['image']
