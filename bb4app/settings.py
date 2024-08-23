@@ -31,7 +31,8 @@ SECRET_KEY = 'django-insecure-4s*l!k#$3__k+vao$gsr+ybji#^%k5z8t0+i7teq3=s1jp09%v
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['127.0.0.1','192.168.29.67']
+ALLOWED_HOSTS = ['bb4-django.onrender.com','127.0.0.1','192.168.29.67']
+
 SITE_ID = 3
 
 # Application definition
