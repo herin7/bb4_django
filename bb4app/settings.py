@@ -16,6 +16,13 @@ from django.conf import settings
 
 import os
 from pathlib import Path
+import os
+
+# Use the environment variable PORT provided by Render, or default to 8000
+PORT = os.getenv('PORT', '8000')
+
+ALLOWED_HOSTS = ['bb4-django.onrender.com', 'localhost', '127.0.0.1']
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
