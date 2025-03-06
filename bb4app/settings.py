@@ -46,7 +46,7 @@ config.read(BASE_DIR / 'config.ini')
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', config.get('GOOGLE', 'CLIENT_ID', fallback=''))
 GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET', config.get('GOOGLE', 'CLIENT_SECRET', fallback=''))
 ALLOWED_HOSTS = ['bb4-django.onrender.com','127.0.0.1','192.168.29.67']
-
+REDIRECT_URI = 
 SITE_ID = 3
 
 # Application definition
@@ -76,7 +76,8 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {'access_type': 'online'},
          'APP': {
             'client_id': GOOGLE_CLIENT_ID,
-            'secret': GOOGLE_CLIENT_SECRET,         # 'redirect_uri': 'http://127.0.0.1:8000/accounts/google/login/callback/',
+            'secret': GOOGLE_CLIENT_SECRET,       
+            'redirect_uri': 'http://bb4-django.onrender.com/accounts/google/login/callback/',
          }
         
     },
