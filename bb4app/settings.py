@@ -46,7 +46,6 @@ config.read(BASE_DIR / 'config.ini')
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', config.get('GOOGLE', 'CLIENT_ID', fallback=''))
 GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET', config.get('GOOGLE', 'CLIENT_SECRET', fallback=''))
 ALLOWED_HOSTS = ['bb4-django.onrender.com','127.0.0.1','192.168.29.67']
-REDIRECT_URI = 
 SITE_ID = 3
 
 # Application definition
