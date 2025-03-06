@@ -43,8 +43,8 @@ DEBUG = True
 config.read(BASE_DIR / 'config.ini')
 
 # Google OAuth settings
-GOOGLE_CLIENT_ID = config['GOOGLE']['CLIENT_ID']
-GOOGLE_CLIENT_SECRET = config['GOOGLE']['CLIENT_SECRET']
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', config.get('GOOGLE', 'CLIENT_ID', fallback=''))
+GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET', config.get('GOOGLE', 'CLIENT_SECRET', fallback=''))
 ALLOWED_HOSTS = ['bb4-django.onrender.com','127.0.0.1','192.168.29.67']
 
 SITE_ID = 3
