@@ -17,12 +17,15 @@ from django.conf import settings
 import os
 from pathlib import Path
 import os
-
+import configparser
 # Use the environment variable PORT provided by Render, or default to 8000
 PORT = os.getenv('PORT', '8000')
 
 ALLOWED_HOSTS = ['bb4-django.onrender.com', 'localhost', '127.0.0.1']
+# Load configuration from config.ini
+config = configparser.ConfigParser()
 
+# GOOGLE_REDIRECT_URI = config['GOOGLE']['REDIRECT_URI']
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +40,11 @@ SECRET_KEY = 'django-insecure-4s*l!k#$3__k+vao$gsr+ybji#^%k5z8t0+i7teq3=s1jp09%v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+config.read(BASE_DIR / 'config.ini')
 
+# Google OAuth settings
+GOOGLE_CLIENT_ID = config['GOOGLE']['CLIENT_ID']
+GOOGLE_CLIENT_SECRET = config['GOOGLE']['CLIENT_SECRET']
 ALLOWED_HOSTS = ['bb4-django.onrender.com','127.0.0.1','192.168.29.67']
 
 SITE_ID = 3
@@ -67,6 +74,11 @@ SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': ['profile', 'email'],
         'AUTH_PARAMS': {'access_type': 'online'},
+         'APP': {
+            'client_id': GOOGLE_CLIENT_ID,
+            'secret': GOOGLE_CLIENT_SECRET,         # 'redirect_uri': 'http://127.0.0.1:8000/accounts/google/login/callback/',
+         }
+        
     },
      'github': {
         'SCOPE': ['profile', 'email'],
@@ -120,7 +132,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+# SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/auth/callback/'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
