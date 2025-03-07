@@ -40,7 +40,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4s*l!k#$3__k+vao$gsr+ybji#^%k5z8t0+i7teq3=s1jp09%v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 config.read(BASE_DIR / 'config.ini')
 
@@ -76,7 +75,7 @@ SOCIALACCOUNT_PROVIDERS = {
          'APP': {
             'client_id': GOOGLE_CLIENT_ID,
             'secret': GOOGLE_CLIENT_SECRET,       
-            'redirect_uri': 'http://bb4-django.onrender.com/accounts/google/login/callback/',
+            'redirect_uri': 'https://bb4-django.onrender.com/accounts/google/login/callback/',
             # 'redirect_uri': 'http://127.0.0.1:8000/accounts/google/login/callback/',
          }
         
@@ -87,11 +86,11 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 # Add this to your settings.py to debug CSRF issues
-CSRF_COOKIE_SECURE = False  
+CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = False
 CSRF_TRUSTED_ORIGINS = ['https://bb4-django.onrender.com', 'http://127.0.0.1:8000']
 
-
+DEBUG = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
