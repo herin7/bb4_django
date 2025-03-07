@@ -21,7 +21,9 @@ import configparser
 # Use the environment variable PORT provided by Render, or default to 8000
 PORT = os.getenv('PORT', '8000')
 
-ALLOWED_HOSTS = ['bb4-django.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['bb4-django.onrender.com'
+                 , 'localhost', '127.0.0.1'
+                 ]
 # Load configuration from config.ini
 config = configparser.ConfigParser()
 
@@ -45,9 +47,7 @@ config.read(BASE_DIR / 'config.ini')
 # Google OAuth settings
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', config.get('GOOGLE', 'CLIENT_ID', fallback=''))
 GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET', config.get('GOOGLE', 'CLIENT_SECRET', fallback=''))
-ALLOWED_HOSTS = ['bb4-django.onrender.com','127.0.0.1','192.168.29.67']
 SITE_ID = 3
-
 # Application definition
 STATIC_URL = "/static/"
 STATIC_ROOT = "staticfiles"
@@ -85,6 +85,10 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {'access_type': 'online'},
     }
 }
+# Add this to your settings.py to debug CSRF issues
+CSRF_COOKIE_SECURE = False  # Set to True in production with HTTPS
+CSRF_COOKIE_HTTPONLY = False
+CSRF_TRUSTED_ORIGINS = ['https://bb4-django.onrender.com', 'http://127.0.0.1:8000']
 
 
 
@@ -207,3 +211,9 @@ EMAIL_PORT=587
 EMAIL_HOST_USER="codekalpa@gmail.com"
 
 EMAIL_HOST_PASSWORD="jofc idrj vjlw rmec"
+
+ACCOUNT_EMAIL_VERIFICATION = True  # Set to "mandatory" if you want email verification
+ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_STORE_TOKENS = True
