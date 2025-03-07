@@ -717,7 +717,7 @@ body {
 .navbar {
   display: flex;
   justify-content: space-between;
-  background-color: black;
+  background-color: linear-gradient(135deg, var(--primary), var(--secondary));
   align-items: center;
   padding: 1rem 2rem;
   /* background: var(--bg); */

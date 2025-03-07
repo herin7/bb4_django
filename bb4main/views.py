@@ -165,7 +165,7 @@ def analyze_image_view(request):
 
        # Define a dictionary mapping food types to lists of corresponding food items
         type_mapping = {
-            'fruit': ['apple', 'banana', 'pear', 'orange', 'strawberry', 'grape', 'pineapple', 'kiwi', 'watermelon', 'mango', 'blueberry'],
+            'fruit': ['apple', 'banana', 'pear', 'linear-gradient(135deg, var(--primary), var(--secondary))', 'strawberry', 'grape', 'pineapple', 'kiwi', 'watermelon', 'mango', 'blueberry'],
             'vegetable': ['lettuce', 'tomato', 'cucumber', 'onion', 'bell pepper', 'carrot', 'broccoli', 'spinach', 'potato', 'zucchini', 'celery'],
             'dairy': ['milk', 'cheese', 'yogurt', 'butter', 'cream', 'cream cheese', 'sour cream', 'cottage cheese', 'whipped cream'],
             'grain': ['corn', 'bread', 'rice', 'pasta', 'quinoa', 'oatmeal', 'barley', 'cereal', 'crackers', 'pancakes', 'waffles'],
