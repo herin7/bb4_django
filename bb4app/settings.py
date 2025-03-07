@@ -213,8 +213,9 @@ EMAIL_HOST_USER="codekalpa@gmail.com"
 
 EMAIL_HOST_PASSWORD="jofc idrj vjlw rmec"
 
-ACCOUNT_EMAIL_VERIFICATION = True  # Set to "mandatory" if you want email verification
+ACCOUNT_EMAIL_VERIFICATION = "none"  # Set to "mandatory" if you want email verification
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_STORE_TOKENS = True
+SOCIALACCOUNT_AUTO_SIGNUP = True
