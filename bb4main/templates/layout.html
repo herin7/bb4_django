@@ -29,7 +29,7 @@
       {% else %}
       <li id="dropdown-li"><a href="#">Sign In <i class="fa-solid fa-chevron-down"></i></a>
         <ul class="dropdown-content" type="none">
-            <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li>
+            {% comment %} <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li> {% endcomment %}
             <li><a href="{% provider_login_url 'google' %}">Sign In with Google</a></li>
         </ul>
       </li>
@@ -47,7 +47,7 @@
       {% else %}
       <li id="dropdown-li"><a href="#">Sign In <i class="fa-solid fa-chevron-down"></i></a>
         <ul class="dropdown-content" type="none">
-            <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li>
+            {% comment %} <li><a href="{% provider_login_url 'github' %}">Sign In with GitHub</a></li> {% endcomment %}
             <li><a href="{% provider_login_url 'google' %}">Sign In with Google</a></li>
         </ul>
     </li>
