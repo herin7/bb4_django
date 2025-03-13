@@ -1,0 +1,27 @@
+{% extends "socialaccount/base_entrance.html" %}
+{% load i18n %}
+{% load allauth %}
+
+{% block head_title %}
+    {% trans "Third-Party Login Failure" %}
+{% endblock head_title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h1 class="card-title">{% trans "Third-Party Login Failure" %}</h1>
+                        {{ auth_error }}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{% trans "An error occurred while attempting to login via your third-party account." %}</p>
+                        <p class="card-text">{% trans "Please try again or contact support if the issue persists." %}</p>
+                        <a href="{% url 'account_login' %}" class="btn btn-primary">{% trans "Return to Login" %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
