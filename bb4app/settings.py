@@ -68,9 +68,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bb4app.wsgi.application'
 # Database
-DATABASE_URL = os.getenv('DATABASE_URL')
-# DATABASE_URL = os.getenv('DATABASE_URL', config.get('POSTGRESQL', 'DATABASE_URL'))
-# print("DATABASE_URL:", DATABASE_URL)  # Debugging line
+# DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.getenv('DATABASE_URL', config.get('POSTGRESQL', 'DATABASE_URL'))
+print("DATABASE_URL:", DATABASE_URL)  # Debugging line
 DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL)
 }
@@ -121,8 +121,8 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', config.get('EMAIL', 'EMAIL_HOST_USER', fallback='codekalpa@gmail.com'))
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', config.get('EMAIL', 'EMAIL_HOST_PASSWORD', fallback='jofc idrj vjlw rmec'))
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
+# ACCOUNT_EMAIL_REQUIRED = True
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
