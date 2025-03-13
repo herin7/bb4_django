@@ -11,7 +11,7 @@ urlpatterns = [
      path('analyze/', views.analyze_image_view, name='analyze_image'), 
     path('delete_food_item/<int:item_id>/', views.delete_food_item, name='delete_food_item'),
      path('login/', views.CustomLoginView.as_view(), name='custom_login'),
-  
+    path('accounts/social/login/error/', views.social_login_error, name='socialaccount_login_error'),
     
 ]
 

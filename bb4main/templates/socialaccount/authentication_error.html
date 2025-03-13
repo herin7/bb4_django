@@ -13,10 +13,15 @@
                 <div class="card">
                     <div class="card-header bg-danger text-white">
                         <h1 class="card-title">{% trans "Third-Party Login Failure" %}</h1>
-                        {{ auth_error }}
                     </div>
                     <div class="card-body">
                         <p class="card-text">{% trans "An error occurred while attempting to login via your third-party account." %}</p>
+                        <p class="card-text"><strong>{% trans "Error Details:" %}</strong></p>
+                        <ul>
+                            <li><strong>Provider:</strong> {{ provider.name }}</li>
+                            <li><strong>Error Code:</strong> {{ code }}</li>
+                            <li><strong>Exception:</strong> {{ exception }}</li>
+                        </ul>
                         <p class="card-text">{% trans "Please try again or contact support if the issue persists." %}</p>
                         <a href="{% url 'account_login' %}" class="btn btn-primary">{% trans "Return to Login" %}</a>
                     </div>

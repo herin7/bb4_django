@@ -83,7 +83,26 @@ def login_view(request):
             return render(request, 'login.html', {'error': 'Invalid username or password'})
     else:
         return render(request, 'login.html')
-    
+from django.shortcuts import render
+from allauth.socialaccount.views import SignupView
+
+def social_login_error(request):
+    # Extract error details from the request
+    provider = request.GET.get('provider', 'Unknown provider')
+    code = request.GET.get('code', 'unknown')
+    exception = request.GET.get('exception', None)
+
+    # Log the error for debugging
+    print(f"Third-party login failure - Provider: {provider}, Code: {code}, Exception: {exception}")
+
+    # Pass the error details to the template
+    context = {
+        'provider': provider,
+        'code': code,
+        'exception': exception,
+    }
+    return render(request, 'socialaccount/authentication_error.html', context)
+  
 
 def registration_view(request):
     if request.method == 'POST':
